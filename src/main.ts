@@ -20,9 +20,10 @@ import { ms, parseBoolean, StringValue } from './libs/common/utils'
  * @function bootstrap
  * @returns {Promise<void>} Промис, который разрешается, когда приложение запущено.
  */
+
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule)
-
+	
 	const config = app.get(ConfigService)
 	const redis = new Redis(config.getOrThrow<string>('REDIS_URI'))
 
@@ -35,9 +36,10 @@ async function bootstrap() {
 	})
 	app.use(
 		session({
+			// Настройки управления сессиями с использованием Redis
 			secret: config.getOrThrow<string>('SESSION_SECRET'),
 			name: config.getOrThrow<string>('SESSION_NAME'),
-			resave: false,
+			resave: true,
 			saveUninitialized: false,
 			cookie: {
 				domain: config.getOrThrow<string>('SESSION_DOMAIN'),
