@@ -16,6 +16,7 @@
 			"@prisma/__generated__/*": ["prisma/__generated__/*"]
 		},
 		"incremental": true,
+		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"strictNullChecks": false,
 		"noImplicitAny": false,
